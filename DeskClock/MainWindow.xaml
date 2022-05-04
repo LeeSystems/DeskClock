@@ -1,0 +1,60 @@
+﻿<Window x:Class="DeskClock.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DeskClock" d:DataContext="{d:DesignInstance Type=local:Configuration}"
+        mc:Ignorable="d"
+        Title="Desk Clock" Height="92" Width="210" 
+        SizeToContent="WidthAndHeight" 
+        ResizeMode="NoResize" 
+        WindowStartupLocation="Manual" WindowStyle="None" 
+        Background="{Binding Config.SelectedTextBackgroundColor.Brush}" 
+        Foreground="{Binding Config.SelectedTextColor.Brush}" 
+        AllowsTransparency="True" Opacity="50"
+        Topmost="{Binding Config.TopWindow}" 
+        Top="{Binding Config.Top}" Left="{Binding Config.Left}" 
+        Closing="Window_Closing" 
+        ContentRendered="Window_ContentRendered" Icon="/Graphics/clock.ico">
+    <Window.Resources>
+        <BooleanToVisibilityConverter x:Key="VisibleIfTrueConverter" />
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="25*"/>
+            <RowDefinition Height="80*"/>
+            <RowDefinition Height="20*"/>
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0" Orientation="Vertical">
+            <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="{Binding Config.TitleFontSizeValue}" 
+               Text="{Binding Config.WindowTitle}" 
+               Visibility="{Binding Config.ShowTitle, Converter={StaticResource VisibleIfTrueConverter}}"/>
+            <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="{Binding Config.DateFontSizeValue}" 
+               Text="{Binding DateTimeNow, StringFormat='{}{0:D}'}"
+               Visibility="{Binding Config.ShowDate, Converter={StaticResource VisibleIfTrueConverter}}"/>
+        </StackPanel>
+        
+        <Button x:Name="Button_Setup" Grid.Row="0" VerticalAlignment="Top"
+                Height="16" Width="16" BorderThickness="0" 
+                HorizontalAlignment="Right" Click="Button_Setup_Click" Background="Transparent">
+            <Image Source="Graphics/gear.png" Height="16" Width="16"/>
+        </Button>
+        
+        <TextBlock  Grid.Row="1" 
+               Text="{Binding DateTimeNow, StringFormat='{}{0:hh:mm tt}'}"  
+               HorizontalAlignment="Center" 
+               VerticalAlignment="Center" 
+               FontSize="{Binding Config.FontSizeValue}" 
+               FontFamily="Arial" 
+               MouseDown="Time_Now_Display_MouseDown" 
+               Cursor="Hand" 
+               Foreground="{Binding Config.SelectedTextColor.Brush}"/>
+
+        <ProgressBar Grid.Row="2" Value="{Binding SecondsNow}" Minimum="0" Maximum="60" 
+                     Height="{Binding Config.SecondsBarHeight}" 
+                     Foreground="{Binding CurrentSecondsBarColor}"
+                     Visibility="{Binding Config.ShowSecondsBar, Converter={StaticResource VisibleIfTrueConverter}}"
+                     Background="{Binding Config.SelectedSecondsBarBackgroundColor.Brush}"
+                     BorderThickness="0"/>
+    </Grid>
+</Window>

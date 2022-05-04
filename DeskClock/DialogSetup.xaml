@@ -1,0 +1,200 @@
+﻿<Window x:Class="DeskClock.DilogSetup"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DeskClock" d:DataContext="{d:DesignInstance Type=local:BrushColorItems}"
+        mc:Ignorable="d"
+        Title="DeskClock - Setup" Height="450" Width="800"
+        WindowStyle="ToolWindow" ResizeMode="CanResizeWithGrip">
+    <Window.Resources>
+        <local:BrushColorItems x:Key="BrushColorItemsResource"/>
+    </Window.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60"/>
+            <RowDefinition Height="275*"/>
+            <RowDefinition Height="100"/>
+        </Grid.RowDefinitions>
+        <!--LOGO and Name-->
+        <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="5,5,5,5">
+            <Image Source="Graphics/LS-logo.png" Width="50" Height="50"/>
+            <Label Content="Lee Systems, LLC" FontSize="25"/>
+        </StackPanel>
+        <!--Controls-->
+        <StackPanel Grid.Row="0" Orientation="Horizontal" FlowDirection="RightToLeft">
+            <Button Name="Button_Close" Content="Close" Margin="4" VerticalAlignment="Bottom" Height="20" Width="75" Click="Button_Close_Click"/>
+            <Button Name="Button_Exit" Content="Exit" Margin="4" VerticalAlignment="Bottom" Height="20" Width="75" Click="Button_Exit_Click"/>
+        </StackPanel>
+
+        <!--Window settings-->
+        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" Margin="5">
+            <Border BorderBrush="Black" BorderThickness="4" CornerRadius="6">
+            <StackPanel Orientation="Vertical" Margin="5">
+                <StackPanel Orientation="Vertical">
+                    <Label Content="Application Settings" FontSize="15"/>
+                    <Line Stroke="Black" StrokeThickness="2" X2="200"  VerticalAlignment="Center" HorizontalAlignment="left"/>
+                    <StackPanel Orientation="Horizontal" Margin="0,5,0,5">
+                        <Label Content="Title" VerticalAlignment="Center"/>
+                        <TextBox Text="{Binding WindowTitle}" Width="200" Margin="2" TextAlignment="Left" 
+                                 VerticalContentAlignment="Center" VerticalAlignment="Center"/>
+                        <CheckBox Content="Display Title" 
+                                  IsChecked="{Binding ShowTitle}"
+                                  HorizontalAlignment="Left" Margin="4" VerticalAlignment="Center"/>
+                        <Label Content="Title Fount Size" VerticalAlignment="Center"/>
+                        <TextBox Text="{Binding TitleFontSizeValue}" Width="40" Margin="2" TextAlignment="Center" 
+                                 VerticalContentAlignment="Center" VerticalAlignment="Center"/>
+                        <CheckBox Content="Stay on Top" 
+                                  IsChecked="{Binding TopWindow}"
+                                  HorizontalAlignment="Left" Margin="4" VerticalAlignment="Center"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="0,5,0,5">
+                            <CheckBox Content="Display Date" 
+                                  IsChecked="{Binding ShowDate}"
+                                  HorizontalAlignment="Left" Margin="4" VerticalAlignment="Center"/>
+                            <Label Content="Date Fount Size" VerticalAlignment="Center"/>
+                            <TextBox Text="{Binding DateFontSizeValue}" Width="40" Margin="2" TextAlignment="Center" 
+                                 VerticalContentAlignment="Center" VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </StackPanel>
+
+                <!--Time Display Controls-->
+                <StackPanel Orientation="Vertical">
+                    <Label Content="Time Display" FontSize="15"/>
+                    <Line Stroke="Black" StrokeThickness="2" X2="200"  VerticalAlignment="Center" HorizontalAlignment="left"/>
+                    <StackPanel Orientation="Horizontal" Margin="0,5,0,5">
+                        <Label Content="Time Zone" VerticalAlignment="Center"/>
+                        <ComboBox VerticalAlignment="Center"
+                                  ItemsSource="{Binding TimeZoneList}" 
+                                  SelectedItem="{Binding TimeZoneSelected}">
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="{Binding DisplayName}"/>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+                        </ComboBox>
+                        <Label Content="Clock Fount Size" VerticalAlignment="Center"/>
+                        <TextBox Text="{Binding FontSizeValue}" Width="40" Margin="2" TextAlignment="Center" 
+                                 VerticalContentAlignment="Center" VerticalAlignment="Center"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="0,5,0,5">
+                        <Label Content="Time Color" VerticalAlignment="Center"/>
+                        <ComboBox VerticalAlignment="Center"
+                                  ItemsSource="{Binding BrushList}" 
+                                  SelectedItem="{Binding SelectedTextColor}">
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Rectangle Fill="{Binding Brush}" Width="16" Height="16" Margin="0,2,5,2" 
+                                                   Stroke="Black" StrokeThickness="2"/>
+                                        <TextBlock Text="{Binding Name}"/>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+                        </ComboBox>
+                        <Label Content="Time Background Color" VerticalAlignment="Center"/>
+                        <ComboBox VerticalAlignment="Center"
+                                  ItemsSource="{Binding BrushList}" 
+                                  SelectedItem="{Binding SelectedTextBackgroundColor}">
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Rectangle Fill="{Binding Brush}" Width="16" Height="16" Margin="0,2,5,2" 
+                                                   Stroke="Black" StrokeThickness="2" />
+                                        <TextBlock Text="{Binding Name}"></TextBlock>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+                        </ComboBox>
+                    </StackPanel>
+                </StackPanel>
+
+                <!--Seconds Bar Controls-->
+                <StackPanel Orientation="Vertical">
+                    <Label Content="Seconds Bar" FontSize="15"/>
+                    <Line Stroke="Black" StrokeThickness="2" X2="200"  VerticalAlignment="Center" HorizontalAlignment="left"/>
+                    <StackPanel Orientation="Horizontal" Margin="0,5,0,5">
+                        <CheckBox Content="Seconds Bar Visible" 
+                                  IsChecked="{Binding ShowSecondsBar}"
+                                  HorizontalAlignment="Left" Margin="4" VerticalAlignment="Center"/>
+                        <CheckBox Content="Highlight Seconds Bar after" 
+                                  IsChecked="{Binding HighlightSeconds}"
+                                  HorizontalAlignment="Left" Margin="4" VerticalAlignment="Center"/>
+                        <TextBox Text="{Binding HighlightSecondsValue}" Width="20" Margin="2" TextAlignment="Center" 
+                                 VerticalContentAlignment="Center" VerticalAlignment="Center"/>
+                        <Label Content="seconds, Seconds bar height"/>
+                        <TextBox Text="{Binding SecondsBarHeight}" Width="30" Margin="2" TextAlignment="Center" 
+                                 VerticalContentAlignment="Center" VerticalAlignment="Center"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="0,5,0,5">
+                        <Label Content="Seconds Bar Background Color"/>
+                        <ComboBox VerticalAlignment="Center"
+                                  ItemsSource="{Binding BrushList}"
+                                  SelectedItem="{Binding SelectedSecondsBarBackgroundColor}">
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Rectangle Fill="{Binding Brush}" Width="16" Height="16" Margin="0,2,5,2" 
+                                                   Stroke="Black" StrokeThickness="2" />
+                                        <TextBlock Text="{Binding Name}"></TextBlock>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+                        </ComboBox>
+                        <Label Content="Seconds Bar Forground Color"/>
+                        <ComboBox VerticalAlignment="Center"
+                                  ItemsSource="{Binding BrushList}" 
+                                  SelectedItem="{Binding SelectedSecondsBarForgroundColor}">
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Rectangle Fill="{Binding Brush}" Width="16" Height="16" Margin="0,2,5,2" 
+                                                   Stroke="Black" StrokeThickness="2" />
+                                        <TextBlock Text="{Binding Name}"></TextBlock>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+                        </ComboBox>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="0,5,0,5">
+                        <Label Content="Seconds Bar Highlight Color"/>
+                        <ComboBox VerticalAlignment="Center"
+                                  ItemsSource="{Binding BrushList}" 
+                                  SelectedItem="{Binding SelectedSecondsBarForgroundHighlightColor}">
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Rectangle Fill="{Binding Brush}" Width="16" Height="16" Margin="0,2,5,2" 
+                                                   Stroke="Black" StrokeThickness="2" />
+                                        <TextBlock Text="{Binding Name}"></TextBlock>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+                        </ComboBox>
+                    </StackPanel>
+                </StackPanel>
+            </StackPanel>
+            </Border>
+        </ScrollViewer>
+
+        <!--Controls-->
+        <Border Grid.Row="2" BorderBrush="Black" BorderThickness="4" CornerRadius="6" Margin="5">
+            <StackPanel Orientation="Vertical" Margin="5">
+                <Label Content="User Profile" FontSize="15"/>
+                <Line Stroke="Black" StrokeThickness="2" X2="200"  VerticalAlignment="Center" HorizontalAlignment="left"/>
+                <StackPanel Orientation="Horizontal">
+                    <Button Name="Button_LoadDefaults" Content="Defaults" Margin="4" VerticalAlignment="Center" 
+                        Height="20" Width="75" Click="Button_LoadDefaults_Click" />
+                    <Button Name="Button_Load" Content="Load" Margin="4" VerticalAlignment="Center" 
+                        Height="20" Width="75" Click="Button_Load_Click" />
+                    <Label Content="Current User Profile"/>
+                    <TextBox Text="{Binding ProfileNameLoaded}" Width="300" Margin="2" TextAlignment="Left" 
+                         VerticalContentAlignment="Center" VerticalAlignment="Center" IsReadOnly="True"/>
+                </StackPanel>
+            </StackPanel>
+        </Border>
+    </Grid>
+</Window>

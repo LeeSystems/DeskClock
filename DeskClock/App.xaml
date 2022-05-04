@@ -1,0 +1,10 @@
+﻿<Application x:Class="DeskClock.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:DeskClock"
+             Startup="Application_Startup">
+    <Application.Resources>
+    <!--Startup="Application_Startup">-->
+    <!--StartupUri="MainWindow.xaml"-->
+    </Application.Resources>
+</Application>

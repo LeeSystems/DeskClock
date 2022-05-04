@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<DeskClockProfile xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+                  xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+                  xmlns="http://tempuri.org/DeskClockProfile.xsd" 
+                  AllwaysOnTop="true"
+                  Name="Eastern Standard Time">
+  <WindowPosition>
+    <Horizontal>150</Horizontal>
+    <Vertical>100</Vertical>
+  </WindowPosition>
+  <TimeDisplay>
+    <TimeZone>(UTC-05:00) Eastern Time (US &amp; Canada)</TimeZone>
+    <ClockFountSize>40</ClockFountSize>
+    <ForgroundColor>Black</ForgroundColor>
+    <BackgroundColor>Transperent</BackgroundColor>
+  </TimeDisplay>
+  <SecondsBar>
+    <Visable>true</Visable>
+    <HighlightEnable>true</HighlightEnable>
+    <HiglightAfter>50</HiglightAfter>
+    <BarHeight>40</BarHeight>
+    <BackgroundColor>Gray</BackgroundColor>
+    <ForgroundColor>Green</ForgroundColor>
+    <HighlightColor>Red</HighlightColor>
+  </SecondsBar>
+</DeskClockProfile>
